@@ -1,0 +1,367 @@
+/* ------------------------------------
+
+Template Name: Maromista
+Description: Responsive HTML5 / CSS3 Template
+Version: 1.0
+Author: Ahmed El-agamy
+
+Table of Content :
+
+01 Remove Placeholder
+02 Navigation
+03 Mobile Navigation
+04 Sidebar Toggle
+05 Responsive Slider
+06 Sticky Header
+07 Ripple Animation
+
+-------------------------------------- */
+
+(function ($) {
+
+    "use strict";
+
+    $(document).ready(function () {
+
+        /* --------------------
+		01- Remove PlaceHolder.
+	----------------------- */
+        function mmPlaceHolder() {
+            $('input,textarea').focus(function () {
+                $(this).data('placeholder', $(this).attr('placeholder'))
+                    .attr('placeholder', '');
+            }).blur(function () {
+                $(this).attr('placeholder', $(this).data('placeholder'));
+            });
+        }
+        mmPlaceHolder();
+
+        /* --------------------
+		02- Navigation.
+	----------------------- */
+        function mmNavigation() {
+            var nomegaMenuItem = $('#mm_main_nav .menu-item-has-children');
+            nomegaMenuItem.hover(function () {
+                if ($('> ul', this).length > 0) {
+                    $('> ul', this).stop().addClass('menu-active');
+                }
+            }, function () {
+                if ($('> ul', this).length > 0) {
+                    $('> ul', this).stop().removeClass('menu-active');
+                }
+            });
+
+            $('.mm-header-search, .mobile-search').click(function (e) {
+                $('.search-box').toggleClass('search-box-on');
+                $('#overLay').fadeIn(300);
+                e.stopPropagation();
+            });
+
+            $('.close-search').click(function (e) {
+                $('.search-box').removeClass('search-box-on');
+                $('#overLay').fadeOut(300);
+                e.stopPropagation();
+            });
+
+            $('.shopping-cart-icon').click(function (e) {
+                $('.shopping-cart-box').slideToggle(300);
+                e.stopPropagation();
+            });
+
+        }
+        mmNavigation();
+
+        /* --------------------
+		03- Mobile Navigation.
+	----------------------- */
+
+        function mmMenuToggleNav() {
+            $("#mm_mobile_nav .arrow").click(function () {
+                $(this).next('ul').stop(true, false, true).slideToggle(300);
+            });
+            $('.open-nav').click(function (e) {
+                $('#mm_mobile_nav').toggleClass('is-open-left');
+                $('#overLay').fadeIn(300);
+                e.stopPropagation();
+            });
+            $('.close-nav').click(function (e) {
+                $('#mm_mobile_nav').toggleClass('is-open-left');
+                $('#overLay').fadeOut(300);
+                e.stopPropagation();
+            });
+        }
+        mmMenuToggleNav();
+
+        /* --------------------
+		04- Sidebar Toggle.
+	----------------------- */
+
+        function mmFooterToggle() {
+            if ($(window).width() < 992) {
+                $('#mm_footer .widget-title, .widget .widget-title').click(function (event) {
+                    $(this).next('div').stop(true, false, true).toggleClass('widget-on');
+                    $(this).toggleClass('widget-active');
+                    event.stopPropagation();
+                });
+            }
+        }
+        mmFooterToggle();
+
+        // Stop element action
+        $('#mm_mobile_nav, .search-box, .shopping-cart-box').click(function (e) {
+            e.stopPropagation();
+        });
+
+        // Close when click on body (Outside elements)
+        $('body').click(function () {
+            $('#overLay').fadeOut(300);
+            $('.search-box').removeClass('search-box-on');
+            $('#mm_mobile_nav').removeClass('is-open-left');
+            $('.shopping-cart-box').slideUp(300);
+        });
+
+        /* --------------------
+		05- Responsive Slider.
+	----------------------- */
+
+        $(".rslides").responsiveSlides({
+            auto: true,
+            speed: 1000,
+            timeout: 5000,
+            pager: true,
+            nav: false,
+            random: false,
+            pause: false,
+            pauseControls: true,
+            prevText: "Previous",
+            nextText: "Next",
+            maxwidth: "",
+            navContainer: "",
+            manualControls: "",
+            namespace: "mslider",
+            before: function () {},
+            after: function () {}
+        });
+
+        /* -----------------------
+		06- Sticky Header
+	-------------------------- */
+        function mmStickyHeader() {
+            var lastScroll = 5;
+
+            $(window).scroll(function (event) {
+
+                var st = $(this).scrollTop();
+
+                if (Math.abs(lastScroll - st) <= 0)
+                    return;
+
+                if (st < lastScroll) {
+                    $(".sticky-opt").addClass('sticky-on');
+                    $(".sticky-opt .site-logo .logo-sticky").addClass('logo-on');
+
+                    if ($(window).scrollTop() == 0) {
+                        $(".sticky-opt").removeClass('sticky-on');
+                        $(".sticky-opt .site-logo .logo-main, .site-logo .logo-rtl").removeClass('logo-off');
+                        $(".sticky-opt .site-logo .logo-sticky").removeClass('logo-on');
+                    }
+
+                } else {
+                    $(".sticky-opt").removeClass('sticky-on');
+                    $(".sticky-opt .site-logo .logo-main, .site-logo .logo-rtl").addClass('logo-off');
+                    $(".sticky-opt .site-logo .logo-sticky").removeClass('logo-off');
+                }
+
+                lastScroll = st;
+            });
+        }
+        mmStickyHeader();
+
+        /* -----------------------
+        07- Ripple Animation
+        -------------------------- */
+        function mmRipple() {
+            $('.rip').mousedown(function (e) {
+                var target = e.target;
+                var rect = target.getBoundingClientRect();
+                var ripple = target.querySelector('.ripple');
+                $(ripple).remove();
+                ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px';
+                target.appendChild(ripple);
+                var top = e.pageY - rect.top - ripple.offsetHeight / 2 - document.body.scrollTop;
+                var left = e.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft;
+                ripple.style.top = top + 'px';
+                ripple.style.left = left + 'px';
+                return false;
+            });
+        }
+        mmRipple();
+
+        /* ----------------------------------------------------
+		9- Quantity.
+	------------------------------------------------------- */
+
+        if (!String.prototype.getDecimals) {
+            String.prototype.getDecimals = function () {
+                var num = this,
+                    match = ('' + num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+                if (!match) {
+                    return 0;
+                }
+                return Math.max(0, (match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
+            }
+        }
+        // Quantity "plus" and "minus" buttons
+        $(document.body).on('click', '.plus, .minus', function () {
+            var $qty = $(this).closest('.quantity').find('.qty'),
+                currentVal = parseFloat($qty.val()),
+                max = parseFloat($qty.attr('max')),
+                min = parseFloat($qty.attr('min')),
+                step = $qty.attr('step');
+
+            // Format values
+            if (!currentVal || currentVal === '' || currentVal === 'NaN') currentVal = 0;
+            if (max === '' || max === 'NaN') max = '';
+            if (min === '' || min === 'NaN') min = 0;
+            if (step === 'any' || step === '' || step === undefined || parseFloat(step) === 'NaN') step = 1;
+
+            // Change the value
+            if ($(this).is('.plus')) {
+                if (max && (currentVal >= max)) {
+                    $qty.val(max);
+                } else {
+                    $qty.val((currentVal + parseFloat(step)).toFixed(step.getDecimals()));
+                }
+            } else {
+                if (min && (currentVal <= min)) {
+                    $qty.val(min);
+                } else if (currentVal > 0) {
+                    $qty.val((currentVal - parseFloat(step)).toFixed(step.getDecimals()));
+                }
+            }
+
+            // Trigger change event
+            $qty.trigger('change');
+        });
+
+
+        /* ----------------------------------------------------
+		10- Smooth Scrolling Using Navigation Menu.
+	------------------------------------------------------- */
+
+        $('#top').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+
+
+        /* ----------------------------------------------------
+		11- Testimonials
+	------------------------------------------------------- */
+        //open the testimonials modal page
+        $('.see-all').on('click', function () {
+            $('.testimonials-all').addClass('is-visible');
+        });
+
+        //close the testimonials modal page
+        $('.testimonials-all .close-btn').on('click', function () {
+            $('.testimonials-all').removeClass('is-visible');
+        });
+        $(document).keyup(function (event) {
+            //check if user has pressed 'Esc'
+            if (event.which == '27') {
+                $('.testimonials-all').removeClass('is-visible');
+            }
+        });
+
+        //build the grid for the testimonials modal page
+        $('.testimonials-all-wrapper').children('ul').masonry({
+            itemSelector: '.testimonials-item'
+        });
+
+        $('.grid').masonry({
+            itemSelector: '.grid-item'
+        });
+
+
+        /* --------------------
+        	12- Chat
+        ----------------------- */
+        function mmChatBox() {
+
+            $('.chat-box-icon').click(function (e) {
+                $('.bottom-chat').fadeIn(300);
+                $('.chat-box h4').fadeOut(300);
+                $(this).fadeOut(100);
+                e.stopPropagation();
+            });
+
+            $('.chat-close').click(function (e) {
+                $('.bottom-chat').fadeOut(100);
+                $('.chat-box-icon').fadeIn(300);
+                $('.chat-box h4').fadeIn(300);
+                e.stopPropagation();
+            });
+
+        }
+
+        mmChatBox();
+        
+        /* --------------------
+		13- Our Team
+	----------------------- */
+        function mm_OurTeam() {
+            var $oneSliderDrag = $('.owl-carousel');
+            if ($oneSliderDrag.length) {
+                $oneSliderDrag.owlCarousel({
+                    loop: true,
+                    autoplay: true,
+                    center: true,
+                    rtl: true,
+                    autoplayHoverPause: true,
+                    smartSpeed: 1000,
+                    margin: 10,
+                    nav: false,
+                    dots: true,
+                    mouseDrag: true,
+                    touchDrag: true,
+                    pullDrag: true,
+                    responsiveClass: true,
+                    responsive: {
+                        1920: {
+                            items: 3
+                        },
+
+                        1360: {
+                            items: 3
+                        },
+
+                        1024: {
+                            items: 1
+                        },
+
+                        0: {
+                            items: 1,
+                        }
+                    }
+                });
+
+                $('.btn-next-slide').click(function () {
+                    $oneSliderDrag.trigger('next.owl.carousel');
+                })
+                // Go to the previous item
+                $('.btn-prev-slide').click(function () {
+                    $oneSliderDrag.trigger('prev.owl.carousel');
+                })
+            }
+        }
+        mm_OurTeam();
+        
+
+    });
+
+})(jQuery);

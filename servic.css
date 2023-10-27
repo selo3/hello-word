@@ -1,0 +1,77 @@
+.desingweb {
+    padding: 80px 30px 30px;
+}
+.desingweb h1{
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+}
+.desingweb h1 span{
+    color: orchid;
+}
+
+.desingweb h4{
+    padding: 0 250px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(102, 102, 101);
+}
+
+.main2{
+    display: flex;
+    padding: 20px 180px;
+    justify-content: center;
+
+    align-items: center;
+}
+.main2 .image{
+    width: 50%;
+}
+.main2 .left h1 , .right h1{
+    font-size: 20px;
+    font-weight: bold;
+    color: orchid;
+
+}
+.main2 h3{
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+.left {
+    text-align: end;
+}
+.right{
+    text-align: start;
+}
+
+
+@media (max-width:1100px){
+    .desingweb {
+        padding:80px 20px;
+    }
+    .desingweb h4{
+        padding: 0 20px;
+    }
+}
+@media (max-width:900px){
+    .main2{
+        flex-direction: column;
+        padding: 20px 20px;
+    }
+    .main2 .image{
+        padding: 30px 0;
+    }
+
+}
+@media (max-width:500px){
+    .main2 .left h1 , .right h1{
+        font-size: 15px;
+    }
+    .main2 h3{
+        font-size: 14px;
+    }
+
+}
+

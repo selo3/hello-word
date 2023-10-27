@@ -1,0 +1,172 @@
+div.section{
+    display: flex;
+    margin-top: 40px;
+   
+    justify-content: center;
+    align-items: center;
+
+}
+.part2 {
+    width: 40%;
+    z-index: 2;
+}
+.part2 img{
+    width: 100%;
+    height: 100%;
+
+}
+.part1{
+    width: 60%;
+    z-index: 2;
+}
+.part1 h1{
+    width: 75%;
+    font-size: 30px;
+    font-weight: bold;
+    color: orchid;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.part1 p{
+    width: 75%;
+    background-color: rgb(208, 213, 213);
+    border-radius: 15px;
+    padding: 20px;
+
+}
+.part1 h2 , .part1 h3{
+    width: 75%;
+    font-size: 25px;
+    font-weight: bold;
+    color: #00cdc4;
+    margin-bottom: 12px;
+    text-align: center;
+}
+.part1 h3{
+    color: rgb(89, 91, 93);
+    font-size: 15px;
+}
+
+.main1{
+    display: grid;
+    grid-template-areas: "one tow" "three four";
+    padding: 30px;
+
+}
+.main1:nth-of-type(2){
+    padding-bottom: 0px;
+}
+
+.content3{
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+
+}
+.content3:nth-of-type(1){
+    grid-area: one;
+}
+
+.content3:nth-of-type(2){
+    grid-area: tow;
+}
+
+.content3:nth-of-type(3){
+    grid-area: four;
+}
+
+.content3:nth-of-type(4){
+    grid-area: three;
+}
+.content3 .prt1{
+    width: 30%;
+}
+.content3 .prt1 img{
+    margin-left: 10px;
+    border-radius: 10px;
+width: 80px;
+padding: 10px;
+background-color: orchid;
+}
+.content3 .prt2 h2{
+    font-size: 20px;
+    font-weight: bold;
+    color: orchid;
+}
+.content3 .prt2 p{
+    text-align: justify;
+    font-weight: bold;
+}
+
+.custom-shape-divider-bottom-1697951201 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1697951201 svg {
+    position: relative;
+    display: block;
+    width: calc(179% + 1.3px);
+    height: 225px;
+}
+
+.custom-shape-divider-bottom-1697951201 .shape-fill {
+    fill: #DA70D6;
+}
+
+/** For tablet devices **/
+@media (min-width: 768px) and (max-width: 1023px) {
+    .custom-shape-divider-bottom-1697951201 svg {
+        width: calc(169% + 1.3px);
+        height: 223px;
+    }
+}
+
+/** For mobile devices **/
+@media (max-width: 767px) {
+    .custom-shape-divider-bottom-1697951201 svg {
+        width: calc(211% + 1.3px);
+        height: 117px;
+    }
+    .main1{
+    grid-template-areas: "one"  "tow" "three" "four";
+
+    }
+    .content3{
+        padding: 2px;
+    }
+
+    .part1{
+        width: 100%;
+    }
+    .part2{
+        width: 80%;
+    }
+    div.section{
+flex-direction: column;
+    }
+}
+
+@media (max-width: 975px) {
+.part1 p{
+    width: 95%;
+}
+}
+
+@media (max-width: 500px) {
+   .content3 .prt2 h2{
+        font-size: 15px;
+    }
+    .content3 .prt2 p {
+        font-size: 14px
+    }
+    .content3 .prt1 img{
+        width: 50px;
+    }
+    }
